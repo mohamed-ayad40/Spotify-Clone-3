@@ -7,6 +7,7 @@ import MyContext from "../context/AlbumContext";
 import { PlayerContext } from '../context/PlayerContext'
 import { ReactContext } from '../context/UserContext'
 import { getcurrentSong, updateCurrentSong } from '../Api/SendRequest';
+// import { current } from '@reduxjs/toolkit';
 const Display = () => {
 
   const {user, setUser} = useContext(ReactContext);
@@ -26,68 +27,57 @@ const Display = () => {
   const [volume, setVolume] = useState(0.5);
   const [previousVolume, setPreviousVolume] = useState(0.5);
   const [repeat, setRepeat] = useState(false);
-  const [currentSong, setCurrentSong] = useState({
-    id: "",
-    name: ""
-  });
+  const [currentSong, setCurrentSong] = useState();
+  const [shouldPlay, setShouldPlay] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const fetchingCurrentSong = async () => {
     const response = await getcurrentSong();
-    console.log(response);
-    const {id, name} = response.data;
-    setCurrentSong({
-      id,
-      name
-    });
+    const result = response.data;
+    if(result._id) {
+      setTrack(result);
+    };
   };
+
+
   const getUser = async () => {
     try {
       setLoading(true);
-      console.log(currentSong);
+
       const response = await axios.get("http://localhost:4000/login/success", {withCredentials: true});
       setUser(response.data.user);
       setLoading(false);
     } catch (err) {
-      console.log(err)
-      console.log(err.response.data.message);
+
       setUser(null);
       setLoading(false);
     }
   }
-  const handler = () => {
-    if(!currentSong) {
-      setTrack(songsData[0])
-    }
-  };
   useEffect(() => {
-    pause();
-    fetchingCurrentSong();
+    // console.log(track);
+    setShouldPlay(false);
+
     getUser();
     getAlbumsData();
+    
     getSongsData();
-    handler();
-  }, []);
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      console.log(e);
-      if(e.code === "Space") {
-        console.log(playStatus)
-        if(!playStatus) play();
-        if(playStatus) pause();
-      };
+    fetchingCurrentSong();
+
+  }, []); 
+
+
+  const handleKeyPress = (e) => {
+    if(e.code === "Space") {
+      if(!playStatus) play();
+      if(playStatus) pause();
     };
-    songsData.filter((item, index) => {
-      if(item._id === currentSong.id) {
-        setTrack(item);
-        window.addEventListener("keydown", handleKeyPress);
-        
-      }
-    });
-    console.log(currentSong);
+  };
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     }
-  }, [currentSong, playStatus]);
+  }, [playStatus]);
   const [time, setTime] = useState({
     currentTime: {
       second: 0,
@@ -98,8 +88,8 @@ const Display = () => {
       minute: 0
     }
   });
-  const timeUpdateRef = useRef(null);
 
+  const timeUpdateRef = useRef(null);
 
 const handleMuteButton = () => {
   setMute((prevState) =>!prevState);
@@ -115,7 +105,6 @@ const handleVolumeChange = (e) => {
       setMute(false);
   }
 };
-
 
 
 useEffect(() => {
@@ -157,26 +146,23 @@ useEffect(() => {
   }
 }, [audioRef, volume]);
 
+  useEffect(() => {
+    // console.log(track);
+    if(shouldPlay){
+      play();
+    }
+  }, [track]);
 
   const playWithId = async (id) => {
-    console.log(id);
-    console.log(songsData);
-    await songsData.map((item, index) => {
-      if(id == item._id) {
-        console.log(item._id)
-        setTrack(item);
-        updateCurrentSong({
-          id: item._id,
-          name: item.name
-        });
-      }
-    })
-    await audioRef.current.play();
-    setPlayStatus(true);      
+    const selectedSong = songsData.find((item) => item._id == id);
+    if(selectedSong) {
+      setShouldPlay(true);
+      setTrack(selectedSong);
+      updateCurrentSong(selectedSong);
+    }
   };
 
   const previous = async() => {
-
     songsData.map(async(item, index) => {
       if(item._id == track._id && index > 0) {
         await setTrack(songsData[index - 1]);
@@ -206,19 +192,23 @@ useEffect(() => {
   };
 
   const play = () => {
-    audioRef.current.play();
-    setPlayStatus(true);
+    if(audioRef.current) {
+      audioRef.current.play();
+      setPlayStatus(true);
+    }
   }
   const pause = () => {
-    audioRef.current.pause();
-    setPlayStatus(false);
+    if(audioRef.current) {
+      audioRef.current.pause();
+      setPlayStatus(false);
+    }
   };
   
   const getSongsData = async () => {
     try {
       const response = await axios.get(`${url}/api/song/list`);
       setSongsData(response.data.songs);
-      console.log(response)
+      // console.log(response)
     } catch (err) {
       console.log(err);
     };

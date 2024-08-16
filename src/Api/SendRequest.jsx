@@ -31,12 +31,12 @@ const api = axios.create({
 export const signIn = async (payload) => {
     try {
         const response = await api.post("/api/user/login", payload); 
-        console.log(response);
+        // console.log(response);
         return response.data.user;
         
     } catch (err) {
         console.log(err)
-        console.log("error occure: "+ err);
+        // console.log("error occure: "+ err);
         return err.message || err;
     };
 };
@@ -45,10 +45,10 @@ export const signIn = async (payload) => {
 export const signUp = async (payload) => {
     try {
         const response = await api.post(`/api/user/signup`, payload);
-        console.log(response);
+        // console.log(response);
         return response
     } catch (err) {
-        console.log("error occure: "+ err); 
+        // console.log("error occure: "+ err); 
         console.log(err);
         return err.message || err;
     };
@@ -57,7 +57,7 @@ export const signUp = async (payload) => {
 export const getcurrentSong = async () => {
     try {
         const response = await api.get("/api/song/playing-song");
-        console.log(response);
+        // console.log(response);
         return response;
     } catch (err) {
         console.log(err);
@@ -66,7 +66,9 @@ export const getcurrentSong = async () => {
 
 export const updateCurrentSong = async (payload) => {
     try {
+        // console.log(payload);
         const response = await api.post("/api/song/playing-song", payload);
+        // console.log(response);
         return response;
     } catch (err) {
         console.log(err);

@@ -28,8 +28,7 @@ const SignUpForm = () => {
             setErrorMessages('Passwords do not match!');
             return; // Prevent form submission if passwords don't match
           } else {
-            const result = await signUp(values);
-            console.log(result)
+            const result = await signUp(values); 
             if(result.status == 201) {
                 navigate("/");
             }

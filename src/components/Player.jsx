@@ -16,13 +16,11 @@ const Player = () => {
             const shuffledSongs = [...songsData];
             for (let i = songsData.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                console.log([shuffledSongs[i], shuffledSongs[j]]);
+
                 [shuffledSongs[i], shuffledSongs[j]] = [shuffledSongs[j], shuffledSongs[i]];
             };
             setSongsData(shuffledSongs);
             setTrack(shuffledSongs[0]);
-            console.log(audioRef);
-            
         }
     };
     useEffect(() => {
@@ -36,22 +34,23 @@ const Player = () => {
         }
     }, [isShuffled]);
     useEffect(() => {
+        // console.log(track)
         if(repeat && audioRef.current.duration == audioRef.current.currentTime) {
                 setPlayStatus(true);
                 audioRef.current.play();
                 return;
         } else {
-            console.log("No repeat")
+            // console.log("No repeat")
         }
-    });
+    }, []);
 
-  return track ? (
+  return track || track != null ? (
     <div className='h-[10%] bg-black flex justify-between items-center text-white px-4'>
         <div className="hidden lg:flex items-center gap-4">
             <img className='w-12' src={track.image} alt="" />
             <div>
                 <p>{track.name}</p>
-                <p>{track.desc.slice(0, 12)}</p>
+                <p>{track?.desc?.slice(0, 12)}</p>
             </div>
         </div>
         <div className='flex flex-col items-center gap-1 m-auto'>
