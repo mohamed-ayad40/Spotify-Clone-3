@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { signIn } from '../Api/SendRequest';
 import { Link, useNavigate } from 'react-router-dom';
+import { ReactContext } from '../context/UserContext';
 
 const LoginForm = () => {
+    const {user, setUser} = useContext(ReactContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [values, setValues] = useState({
