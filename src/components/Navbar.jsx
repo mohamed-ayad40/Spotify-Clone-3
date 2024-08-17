@@ -11,6 +11,7 @@ const Navbar = ({searchTerm, setSearchTerm, handleInputChange}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const {user} = useContext(ReactContext);
+  console.log(user);
   const mainInfo = useContext(PlayerContext);
   const songs = mainInfo.songsData;
   const searchPage = location.pathname === "/search";
