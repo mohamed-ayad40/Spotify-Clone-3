@@ -47,13 +47,22 @@ const Display = () => {
   const getUser = async () => {
     try {
       setLoading(true);
-
-      const response = await axios.get("http://localhost:4000/login/success", {withCredentials: true});
-      // setUser(response.data.user);
+      const api = axios.create({
+        baseURL: "http://localhost:4000",
+        withCredentials: true,
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    });
+      const response = await api.get("http://localhost:4000/login/success", {withCredentials: true});
+      console.log("response is ", response);
+      console.log("user ", response.data.user);
+      setUser(response.data.user);
       console.log("A&A ")
       setLoading(false);
     } catch (err) {
-
+      console.log(err);
       setUser(null);
       setLoading(false);
     }
