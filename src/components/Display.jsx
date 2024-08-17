@@ -48,14 +48,14 @@ const Display = () => {
     try {
       setLoading(true);
       const api = axios.create({
-        baseURL: "https://spotify-clone-server-tau.vercel.app/",
+        baseURL: "https://spotify-clone-server-tau.vercel.app",
         withCredentials: true,
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         }
     });
-      const response = await api.get("https://spotify-clone-server-tau.vercel.app/login/success", {withCredentials: true});
+      const response = await api.get("/login/success", {withCredentials: true});
       console.log("response is ", response);
       console.log("user ", response.data.user);
       setUser(response.data.user);
