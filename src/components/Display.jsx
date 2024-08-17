@@ -31,6 +31,7 @@ const Display = () => {
   const [shouldPlay, setShouldPlay] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    console.log(user);
     console.log("User changed in display!");
 }, [user]);
   const fetchingCurrentSong = async () => {

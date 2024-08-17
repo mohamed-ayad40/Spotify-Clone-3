@@ -12,6 +12,7 @@ const LoginForm = () => {
         password: ""
     });
     useEffect(() => {
+        console.log(user);
         console.log("User changed in auth!");
     }, [user]);
     const handleChange = (e) => {
