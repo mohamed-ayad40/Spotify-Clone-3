@@ -31,7 +31,7 @@ const api = axios.create({
 export const signIn = async (payload) => {
     try {
         const response = await api.post("/api/user/login", payload); 
-        // console.log(response);
+        console.log(response);
         return response.data.user;
         
     } catch (err) {
