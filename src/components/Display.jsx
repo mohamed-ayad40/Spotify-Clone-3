@@ -77,7 +77,7 @@ const Display = () => {
     getSongsData();
     fetchingCurrentSong();
 
-  }, []); 
+  }, []);
 
 
   const handleKeyPress = (e) => {
