@@ -30,7 +30,9 @@ const Display = () => {
   const [currentSong, setCurrentSong] = useState();
   const [shouldPlay, setShouldPlay] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  useEffect(() => {
+    console.log("User changed in display!");
+}, [user]);
   const fetchingCurrentSong = async () => {
     const response = await getcurrentSong();
     const result = response.data;
@@ -45,7 +47,8 @@ const Display = () => {
       setLoading(true);
 
       const response = await axios.get("http://localhost:4000/login/success", {withCredentials: true});
-      setUser(response.data.user);
+      // setUser(response.data.user);
+      console.log("A&A ")
       setLoading(false);
     } catch (err) {
 

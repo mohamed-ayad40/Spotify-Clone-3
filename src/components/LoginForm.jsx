@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { signIn } from '../Api/SendRequest';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReactContext } from '../context/UserContext';
@@ -11,6 +11,9 @@ const LoginForm = () => {
         email: "",
         password: ""
     });
+    useEffect(() => {
+        console.log("User changed in auth!");
+    }, [user]);
     const handleChange = (e) => {
         setValues((prevValue) => {
             return {...prevValue, [e.target.name]: e.target.value};
