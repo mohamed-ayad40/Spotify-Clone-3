@@ -18,7 +18,7 @@ const Navbar = ({searchTerm, setSearchTerm, handleInputChange}) => {
   const canGoBack = location.pathname === "/";
   const canGoForward = location.pathname !== "/"
   const logout = () => {
-    window.open("http://localhost:4000/api/user/logout", "_self");
+    window.open("https://spotify-clone-server-tau.vercel.app/api/user/logout", "_self");
   };
 
   return (

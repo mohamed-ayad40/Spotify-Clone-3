@@ -15,7 +15,7 @@ const Display = () => {
   const handleUpdate = (newValue) => {
     setValue(newValue);
   };
-  const url = "http://localhost:4000";
+  const url = "https://spotify-clone-server-tau.vercel.app/";
   const [songsData, setSongsData] = useState([]);
   const [albumsData, setAlbumsData] = useState([]);
   const [track, setTrack] = useState(null);
@@ -48,14 +48,14 @@ const Display = () => {
     try {
       setLoading(true);
       const api = axios.create({
-        baseURL: "http://localhost:4000",
+        baseURL: "https://spotify-clone-server-tau.vercel.app/",
         withCredentials: true,
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         }
     });
-      const response = await api.get("http://localhost:4000/login/success", {withCredentials: true});
+      const response = await api.get("https://spotify-clone-server-tau.vercel.app/login/success", {withCredentials: true});
       console.log("response is ", response);
       console.log("user ", response.data.user);
       // setUser(response.data.user);
