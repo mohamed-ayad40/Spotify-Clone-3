@@ -25,13 +25,16 @@ const api = axios.create({
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
-    }
+    },
+    
 });
 
 export const signIn = async (payload) => {
     try {
         const response = await api.post("/api/user/login", payload); 
         console.log(response);
+        const secondResponse = await api.get("/");
+        console.log(secondResponse);
         return response.data.user;
         
     } catch (err) {
