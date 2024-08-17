@@ -27,7 +27,8 @@ const Auth = () => {
     // };
 
     const loginWithGoogle = () => {
-        window.open("http://localhost:4000/auth/google/callback", "_self")  
+        // window.open("http://localhost:4000/auth/google/callback", "_self");
+        window.open("https://spotify-clone-server-tau.vercel.app/auth/google/callback", "_self")  
     };
     useEffect(() => {
         setIsLoading(false);
