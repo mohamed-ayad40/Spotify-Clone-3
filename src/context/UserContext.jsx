@@ -5,7 +5,7 @@ export const ReactContext =  React.createContext({});
 
 
 const UserContext = ({children}) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState();
   return (
     <ReactContext.Provider value={{user, setUser}}>
         {children}
