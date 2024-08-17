@@ -74,6 +74,8 @@ const Display = () => {
       });
       console.log("before response");
       console.log(response)
+      const result = await response.json();
+      console.log(result);
       console.log("after response");
     } catch(err) {
       console.log("before error");
