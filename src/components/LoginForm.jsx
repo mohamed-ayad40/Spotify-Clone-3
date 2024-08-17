@@ -25,8 +25,8 @@ const LoginForm = () => {
         setLoading(true);
         try {
             const results = await signIn(values);
-            setUser(results);
-            if(results) navigate("/");
+            // setUser(results);
+            // if(results) navigate("/");
         } catch (err) {
             console.log(err);
         }

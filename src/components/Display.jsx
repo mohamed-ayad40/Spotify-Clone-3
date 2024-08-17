@@ -58,12 +58,12 @@ const Display = () => {
       const response = await api.get("http://localhost:4000/login/success", {withCredentials: true});
       console.log("response is ", response);
       console.log("user ", response.data.user);
-      setUser(response.data.user);
+      // setUser(response.data.user);
       console.log("A&A ")
       setLoading(false);
     } catch (err) {
       console.log(err);
-      setUser(null);
+      // setUser(null);
       setLoading(false);
     }
   }
