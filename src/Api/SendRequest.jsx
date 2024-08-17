@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let url = "https://spotify-clone-server-tau.vercel.app/"
+let url = "https://spotify-clone-server-tau.vercel.app"
 // export const signInWithGoogle = async (data) => {
 //     try {
 //         const response = await fetch(`${url}/api/user/addGoogleUser`, {
