@@ -17,9 +17,14 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const results = await signIn(values);
+        try {
+            const results = await signIn(values);
+            setUser(results);
+            if(results) navigate("/");
+        } catch (err) {
+            console.log(err);
+        }
         setLoading(false);
-        if(results) navigate("/");
     };
     // const handleSubmit = async (e) => {
     //     e.preventDefault();
