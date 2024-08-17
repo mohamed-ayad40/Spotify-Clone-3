@@ -44,34 +44,49 @@ const Display = () => {
   };
 
 
-  const getUser = async () => {
+  // const getUser = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const api = axios.create({
+  //       baseURL: "https://spotify-clone-server-tau.vercel.app",
+  //       withCredentials: true,
+  //       headers: {
+  //           "Content-Type": "application/json",
+  //           "Accept": "application/json"
+  //       }
+  //   });
+  //     const response = await api.get("/login/success", {withCredentials: true});
+  //     console.log("response is ", response);
+  //     console.log("user ", response.data.user);
+  //     setUser(response.data.user);
+  //     console.log("A&A ")
+  //     setLoading(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //     setUser(null);
+  //     setLoading(false);
+  //   }
+  // }
+  const find = async () => {
     try {
-      setLoading(true);
-      const api = axios.create({
-        baseURL: "https://spotify-clone-server-tau.vercel.app",
-        withCredentials: true,
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
-    });
-      const response = await api.get("/login/success", {withCredentials: true});
-      console.log("response is ", response);
-      console.log("user ", response.data.user);
-      setUser(response.data.user);
-      console.log("A&A ")
-      setLoading(false);
-    } catch (err) {
+      const response = await fetch("https://spotify-clone-server-tau.vercel.app/login/success", {
+        credentials: 'include'
+      });
+      console.log("before response");
+      console.log(response)
+      console.log("after response");
+    } catch(err) {
+      console.log("before error");
       console.log(err);
-      setUser(null);
-      setLoading(false);
-    }
-  }
+      console.log("before error");
+    };
+  };
+
   useEffect(() => {
     // console.log(track);
     setShouldPlay(false);
-
-    getUser();
+    find();
+    // getUser();
     getAlbumsData();
     
     getSongsData();
