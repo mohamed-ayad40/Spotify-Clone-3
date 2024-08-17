@@ -15,7 +15,7 @@ const Display = () => {
   const handleUpdate = (newValue) => {
     setValue(newValue);
   };
-  const url = "https://spotify-clone-server-tau.vercel.app/";
+  const url = "https://spotify-clone-server-tau.vercel.app";
   const [songsData, setSongsData] = useState([]);
   const [albumsData, setAlbumsData] = useState([]);
   const [track, setTrack] = useState(null);
