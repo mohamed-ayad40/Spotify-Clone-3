@@ -15,7 +15,8 @@ const Display = () => {
   const handleUpdate = (newValue) => {
     setValue(newValue);
   };
-  const url = "https://spotify-clone-server-tau.vercel.app";
+  const url = "http://localhost:4000";
+  // const url = "https://spotify-clone-server-tau.vercel.app";
   const [songsData, setSongsData] = useState([]);
   const [albumsData, setAlbumsData] = useState([]);
   const [track, setTrack] = useState(null);
@@ -69,9 +70,12 @@ const Display = () => {
   // }
   const find = async () => {
     try {
-      const response = await fetch("https://spotify-clone-server-tau.vercel.app/login/success", {
+      const response = await fetch("http://localhost:4000/login/success", {
         credentials: 'include'
       });
+      // const response = await fetch("https://spotify-clone-server-tau.vercel.app/login/success", {
+      //   credentials: 'include'
+      // });
       console.log("before response");
       console.log(response)
       const result = await response.json();
