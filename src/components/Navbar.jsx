@@ -6,19 +6,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { PlayerContext } from '../context/PlayerContext';
 import SongItem from './SongItem';
+import { backendUrl } from '../Api/SendRequest';
 
 const Navbar = ({searchTerm, setSearchTerm, handleInputChange}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const {user} = useContext(ReactContext);
-  console.log(user);
   const mainInfo = useContext(PlayerContext);
   const songs = mainInfo.songsData;
   const searchPage = location.pathname === "/search";
   const canGoBack = location.pathname === "/";
   const canGoForward = location.pathname !== "/"
   const logout = () => {
-    window.open("https://spotify-clone-server-tau.vercel.app/api/user/logout", "_self");
+    window.open(`${backendUrl}/api/user/logout`, "_self");
   };
 
   return (

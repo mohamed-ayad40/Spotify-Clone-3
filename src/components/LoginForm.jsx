@@ -11,10 +11,6 @@ const LoginForm = () => {
         email: "",
         password: ""
     });
-    useEffect(() => {
-        console.log(user);
-        console.log("User changed in auth!");
-    }, [user]);
     const handleChange = (e) => {
         setValues((prevValue) => {
             return {...prevValue, [e.target.name]: e.target.value};
@@ -25,14 +21,12 @@ const LoginForm = () => {
         setLoading(true);
         try {
             const results = await signIn(values);
-            console.log(results);
             if(results) {
-                console.log("Results");
                 setUser(results);
                 if(results) navigate("/");
             }
         } catch (err) {
-            console.log(err);
+            console.log("Mistake");
         }
         setLoading(false);
     };

@@ -6,7 +6,8 @@ import axios from "axios";
 import MyContext from "../context/AlbumContext";
 import { PlayerContext } from '../context/PlayerContext'
 import { ReactContext } from '../context/UserContext'
-import { getcurrentSong, updateCurrentSong } from '../Api/SendRequest';
+import { getcurrentSong, updateCurrentSong, backendUrl } from '../Api/SendRequest';
+
 // import { current } from '@reduxjs/toolkit';
 const Display = () => {
 
@@ -15,8 +16,6 @@ const Display = () => {
   const handleUpdate = (newValue) => {
     setValue(newValue);
   };
-  const url = "http://localhost:4000";
-  // const url = "https://spotify-clone-server-tau.vercel.app";
   const [songsData, setSongsData] = useState([]);
   const [albumsData, setAlbumsData] = useState([]);
   const [track, setTrack] = useState(null);
@@ -31,11 +30,7 @@ const Display = () => {
   const [currentSong, setCurrentSong] = useState();
   const [shouldPlay, setShouldPlay] = useState(false);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    console.log("BEfore display");
-    console.log(user);
-    console.log("User changed in display!");
-}, [user]);
+
   const fetchingCurrentSong = async () => {
     const response = await getcurrentSong();
     const result = response.data;
@@ -70,21 +65,13 @@ const Display = () => {
   // }
   const find = async () => {
     try {
-      const response = await fetch("http://localhost:4000/login/success", {
+      const response = await fetch(`${backendUrl}/login/success`, {
         credentials: 'include'
       });
-      // const response = await fetch("https://spotify-clone-server-tau.vercel.app/login/success", {
-      //   credentials: 'include'
-      // });
-      console.log("before response");
-      console.log(response)
       const result = await response.json();
-      console.log(result);
-      console.log("after response");
+      setUser(result.user)
     } catch(err) {
-      console.log("before error");
-      console.log(err);
-      console.log("before error");
+      console.log("Couldn't find users");
     };
   };
 
@@ -241,20 +228,19 @@ useEffect(() => {
   
   const getSongsData = async () => {
     try {
-      const response = await axios.get(`${url}/api/song/list`);
+      const response = await axios.get(`${backendUrl}/api/song/list`);
       setSongsData(response.data.songs);
-      // console.log(response)
     } catch (err) {
-      console.log(err);
+      console.log("Mistake");
     };
   };
 
   const getAlbumsData = async () => {
     try {
-      const response = await axios.get(`${url}/api/album/list`);
+      const response = await axios.get(`${backendUrl}/api/album/list`);
       setAlbumsData(response.data.allAlbums);
     } catch (err) {
-      console.log(err);
+      console.log("Mistake");
     }
   };
 

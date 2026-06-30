@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SignUpForm from './SignUpForm';
 import "./loading.css";
+import { backendUrl } from '../Api/SendRequest';
 
 const Auth = () => {
     
@@ -27,9 +28,9 @@ const Auth = () => {
     // };
 
     const loginWithGoogle = () => {
-        // window.open("http://localhost:4000/auth/google/callback", "_self");
-        window.open("https://spotify-clone-server-tau.vercel.app/auth/google", "_self");
+        window.open(`${backendUrl}/auth/google`, "_self");
     };
+
     useEffect(() => {
         setIsLoading(false);
     }, []);
