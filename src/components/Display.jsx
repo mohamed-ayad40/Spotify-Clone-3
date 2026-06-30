@@ -277,7 +277,7 @@ useEffect(() => {
                   </div>
               </div>
             }
-            {songsData.length !== 0 && 
+            {/* {songsData.length !== 0 &&  */}
             <>
               <div className="h-[90%] flex">
                 <Sidebar />
@@ -286,7 +286,8 @@ useEffect(() => {
                 </MyContext.Provider>
               </div>
               <Player handleMuteButton={handleMuteButton} />
-            </>}
+            </>
+            {/* } */}
             <audio ref={audioRef} src={track ? track.file : ""} preload='auto'></audio>
           </div>
         </PlayerContext.Provider>
